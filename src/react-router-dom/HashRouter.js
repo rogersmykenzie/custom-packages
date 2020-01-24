@@ -12,6 +12,14 @@ export class HashRouter extends React.Component {
   }
 
   componentDidMount() {
+    //make sure that we start out with the hash in the URL
+    if (!window.location.href.includes("/#/")) {
+      let tempArr = window.location.href
+        .substring(window.location.href.indexOf("/") + 2)
+        .split("/");
+      let endURL = tempArr.slice(1).join("/");
+      window.location.href = "/#/" + endURL;
+    }
     //add listener for the hashchange
     window.addEventListener("hashchange", this.computeProps);
     //set default values for routing state/props

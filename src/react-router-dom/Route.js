@@ -1,44 +1,40 @@
 import React from "react";
 
 import { HashRouterContext } from "./HashRouter";
+import { strictCheckUrl, looseCheckUrl, getCurrUrl } from "./util";
 
 class RouteConsumer extends React.Component {
-  getCurrUrl() {
-    return window.location.href.substring(
-      window.location.href.indexOf("/#/") + 2
-    );
-  }
-
-  looseCheckUrl() {
-    let myUrl = this.getCurrUrl();
-    let arr1 = myUrl.split("");
-    let arr2 = this.props.path.split("");
-    let length = Math.min(arr1.length, arr2.length);
-    for (let i = 0; i < length; i++) {
-      if (arr1[i] !== arr2[i]) {
-        return false;
+  constructor(props) {
+    super(props);
+    this.state = {
+      match: {
+        params: {},
+        isExact: strictCheckUrl(props.path, getCurrUrl()),
+        path: "",
+        url: ""
       }
-    }
-    return true;
+    };
   }
 
-  strictCheckUrl() {
-    let myUrl = this.getCurrUrl();
-    if (myUrl === this.props.path) {
-      return true;
-    }
-    return false;
+  getParams(path) {
+    console.log(path.split("/"));
   }
   render() {
     if (
-      (this.props.exact && this.strictCheckUrl()) ||
-      (!this.props.exact && this.looseCheckUrl())
+      (this.props.exact && strictCheckUrl(this.props.path, getCurrUrl())) ||
+      (!this.props.exact && looseCheckUrl(this.props.path, getCurrUrl()))
     ) {
+      console.log("here");
       if (this.props.render) {
         return this.props.render(this.props);
       } else if (this.props.component) {
         console.log("true");
-        return <this.props.component {...this.props.context} />;
+        return (
+          <this.props.component
+            {...this.props.context}
+            match={this.state.match}
+          />
+        );
       } else {
         return null;
       }
