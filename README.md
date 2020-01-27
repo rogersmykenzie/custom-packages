@@ -19,7 +19,7 @@ These methods are given to us by the store that is returned from the `createStor
 ### `getState`
 
 * PARAMS: None
-* RETURNS: The current state. This is simply stored in a variable called `state`. Note that to prevent potential direct mutation, we return a copy of `state`.
+* RETURNS: The current state. This is simply stored in a variable called `state`. Note that to prevent potential direct mutation, it is set up to return a copy of `state`.
 
 ### `dispatch`
 
