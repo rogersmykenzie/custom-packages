@@ -14,7 +14,7 @@ The core/bare essential redux functionality has three main parts/methods to be a
 * `dispatch`
 * `subscribe`
 
-These methods are given to us by the store that is returned from the `createStore` method. `createStore` itself should receive a reducer as a parameter.
+These methods are given to us by the store that is returned from the `createStore` method. `createStore` itself should receive a reducer function as a parameter.
 
 ### `getState`
 
@@ -24,4 +24,4 @@ These methods are given to us by the store that is returned from the `createStor
 ### `dispatch`
 
 * PARAMS: An action. Actions are simply objects that describe a change that is being made to the state as well as any pertinent data. We don't have to worry about the structure of the action however. All we have to do is pass it off to the reducer and let it handle all the state changes.
-* OPERATIONS: Dispatch passes the current state and the provided action to the reducer, which spits back out the new state, which we use to update the stored state. Note that subscriptions should run every time state changes, 
+* OPERATIONS: Dispatch passes the current state and the provided action to the reducer, which spits back out the new state, which we use to update the stored state. Note that subscriptions should run every time state changes
