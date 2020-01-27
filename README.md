@@ -1,68 +1,27 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# About this Project
 
-## Available Scripts
+This project is an attempt by me to rebuild the basic functionality and api of the main stack that I work with day to day in order to achieve a greater understanding of how each package works. This is a WIP and is purely for learning purposes. This repo was created in order to backup and preserve the code.
 
-In the project directory, you can run:
+Attached to this README will be descriptions of each package I rebuild, and a synopsis of why I took the approaches I did.
 
-### `yarn start`
+# Redux (src/redux)
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Replication Outline
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+The core/bare essential redux functionality has three main parts/methods to be aware of. Those methods are:
 
-### `yarn test`
+* `getState`
+* `dispatch`
+* `subscribe`
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+These methods are given to us by the store that is returned from the `createStore` method. `createStore` itself should receive a reducer as a parameter.
 
-### `yarn build`
+### `getState`
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+* PARAMS: None
+* RETURNS: The current state. This is simply stored in a variable called `state`. Note that to prevent potential direct mutation, we return a copy of `state`.
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+### `dispatch`
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `yarn build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+* PARAMS: An action. Actions are simply objects that describe a change that is being made to the state as well as any pertinent data. We don't have to worry about the structure of the action however. All we have to do is pass it off to the reducer and let it handle all the state changes.
+* OPERATIONS: Dispatch passes the current state and the provided action to the reducer, which spits back out the new state, which we use to update the stored state. Note that subscriptions should run every time state changes, 
